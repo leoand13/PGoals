@@ -1,0 +1,97 @@
+.board-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px clamp(16px, 3vw, 40px);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+}
+
+.column {
+  background: #f4f5f7;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: calc(100vh - 140px);
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 25px;
+    margin: 0 0 12px;
+    color:darkblue;
+  }
+}
+
+::ng-deep .task-card {
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .p-card-body {
+    padding: 10px;
+  }
+
+  .title {
+    margin: 0 0 4px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .description {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #777;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 4px;
+  }
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  p-select {
+    width: 100%;
+  }
+}

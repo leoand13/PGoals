@@ -1,0 +1,66 @@
+<div class="board-wrapper">
+  <div class="header">
+    <h1>PGOALS</h1>
+    <p-button label="New task" icon="pi pi-plus" (onClick)="openCreateDialog()" />
+  </div>
+
+  <div class="board">
+    <div class="column" *ngFor="let col of columns">
+      <h2>{{ col.label }}</h2>
+
+      <p-card
+        *ngFor="let task of tasksByStatus(col.status)"
+        styleClass="task-card"
+        (click)="openEditDialog(task)"
+      >
+        <p class="title">{{ task.title }}</p>
+        <p class="description" *ngIf="task.description">{{ task.description }}</p>
+
+        <div class="card-actions" (click)="$event.stopPropagation()">
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [text]="true"
+            (onClick)="deleteTask(task)"
+          />
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  [(visible)]="dialogVisible"
+  [modal]="true"
+  [header]="editingTask ? 'Modify task' : 'New task'"
+  [style]="{ width: '400px' }"
+>
+  <div class="dialog-form">
+    <label for="title">Title</label>
+    <input id="title" pInputText [(ngModel)]="formTitle" placeholder="Title"/>
+
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      pTextarea
+      [(ngModel)]="formDescription"
+      rows="4"
+      placeholder="Description (optionnal)"
+    ></textarea>
+
+    <label for="status">Status</label>
+    <p-select
+      [options]="columns"
+      [(ngModel)]="formStatus"
+      optionLabel="label"
+      optionValue="status"
+      placeholder="Select a status"
+      appendTo="body"
+      class="w-full md:w-56" />
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Annuler" severity="secondary" [text]="true" (onClick)="closeDialog()" />
+    <p-button label="Enregistrer" icon="pi pi-check" (onClick)="saveTask()" />
+  </ng-template>
+</p-dialog>
